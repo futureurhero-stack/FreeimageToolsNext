@@ -1,4 +1,4 @@
-// app/layout.tsx
+// app/layout.js
 import "./globals.css";
 
 export const metadata = {
@@ -6,14 +6,11 @@ export const metadata = {
   description: "Free JPG converter & image size reducer in your browser."
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>{children}</body>
     </html>
   );
 }
+
