@@ -3,6 +3,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
 export default function HomePage() {
+  // language
+  const [lang, setLang] = useState("ko");
+
   // tabs
   const [tab, setTab] = useState("jpg");
 
@@ -10,6 +13,138 @@ export default function HomePage() {
   const [jpgQuality, setJpgQuality] = useState(80);
   const [resizeTargetKB, setResizeTargetKB] = useState(500);
   const [idTargetKB, setIdTargetKB] = useState(200);
+
+  // translations
+  const t = useMemo(() => ({
+    ko: {
+      title: "FreeImageTools",
+      subtitle: "브라우저에서 무료로 JPG 변환 및 이미지 크기 축소",
+      heroNote: "100% 브라우저 기반 · 서버 업로드 없음",
+      tabs: {
+        jpg: "JPG 변환기",
+        resize: "이미지 크기",
+        idphoto: "증명사진"
+      },
+      jpg: {
+        title: "JPG 변환기",
+        sub: "PNG, WebP 등 다양한 형식을 JPG 파일로 변환합니다.",
+        quality: "JPG 품질",
+        qualityDesc: "(높을수록 파일 크기는 크고 품질은 좋음)",
+        dropMain: "이미지 파일을 드래그 & 드롭하세요",
+        dropSub: "PNG, WebP 등이 JPG로 변환됩니다.",
+        waiting: "이미지 대기 중...",
+        noImages: "이미지 파일이 감지되지 않았습니다.",
+        processing: "처리 중",
+        file: "파일",
+        done: "완료",
+        error: "오류",
+        finished: "완료되었습니다."
+      },
+      resize: {
+        title: "이미지 크기 조정",
+        sub: "이미지를 목표 크기(KB)로 압축합니다.",
+        targetSize: "목표 크기",
+        targetSizeDesc: "슬라이더를 이동하세요 (50KB ~ 1000KB). 50KB 단위.",
+        dropMain: "이미지 파일을 드래그 & 드롭하세요",
+        dropSub: "각 이미지가 선택한 크기로 재압축됩니다.",
+        waiting: "이미지 대기 중...",
+        noImages: "이미지 파일이 감지되지 않았습니다.",
+        processing: "처리 중",
+        file: "파일",
+        done: "완료",
+        error: "오류",
+        finished: "완료되었습니다.",
+        success: "성공",
+        failed: "실패"
+      },
+      idphoto: {
+        title: "증명사진",
+        sub: "여권, 비자, 서식용 표준 증명사진을 만듭니다.",
+        sizePreset: "크기 프리셋",
+        sizePresetDesc: "일반적인 표준 (중앙 크롭 + 리사이즈)",
+        fileSize: "파일 크기",
+        fileSizeDesc: "50KB ~ 1000KB. 대부분의 온라인 서식에는 100-300KB가 적합합니다. 50KB 단위.",
+        dropMain: "얼굴 사진을 드래그 & 드롭하세요",
+        dropSub: "이미지는 선택한 비율로 중앙 크롭되고 증명사진 크기로 리사이즈됩니다.",
+        waiting: "이미지 대기 중...",
+        noImages: "이미지 파일이 감지되지 않았습니다.",
+        processing: "처리 중",
+        file: "파일",
+        done: "완료",
+        error: "오류",
+        finished: "완료되었습니다.",
+        success: "성공",
+        failed: "실패"
+      },
+      status: "상태",
+      footer: "FreeImageTools. 모든 사람을 위한 무료 웹 도구"
+    },
+    en: {
+      title: "FreeImageTools",
+      subtitle: "Free JPG converter & image size reducer in your browser.",
+      heroNote: "100% browser-based · No upload to server",
+      tabs: {
+        jpg: "JPG Converter",
+        resize: "Image Size",
+        idphoto: "ID Photo"
+      },
+      jpg: {
+        title: "JPG Converter",
+        sub: "Convert PNG, WebP and more into JPG files.",
+        quality: "JPG Quality",
+        qualityDesc: "(Higher = bigger file, better quality)",
+        dropMain: "Drag & drop image file(s)",
+        dropSub: "PNG, WebP, etc. will be converted to JPG.",
+        waiting: "Waiting for images...",
+        noImages: "No image files detected.",
+        processing: "Processing",
+        file: "file(s)",
+        done: "Done",
+        error: "Error",
+        finished: "Finished."
+      },
+      resize: {
+        title: "Image Size Adjustment",
+        sub: "Compress images to your target size (KB).",
+        targetSize: "Target size",
+        targetSizeDesc: "Move the slider (50KB ~ 1000KB). 50KB step.",
+        dropMain: "Drag & drop image file(s)",
+        dropSub: "Each image will be recompressed under the selected size.",
+        waiting: "Waiting for images...",
+        noImages: "No image files detected.",
+        processing: "Processing",
+        file: "file(s)",
+        done: "Done",
+        error: "Error",
+        finished: "Finished.",
+        success: "Success",
+        failed: "Failed"
+      },
+      idphoto: {
+        title: "ID Photo",
+        sub: "Create standard ID photos for passport, visa, and forms.",
+        sizePreset: "Size preset",
+        sizePresetDesc: "Common standards (center-crop + resize)",
+        fileSize: "File size",
+        fileSizeDesc: "50KB ~ 1000KB. 100–300KB is good for most online forms. 50KB step.",
+        dropMain: "Drag & drop face photo(s)",
+        dropSub: "The image will be center-cropped to the selected ratio and resized to ID photo size.",
+        waiting: "Waiting for images...",
+        noImages: "No image files detected.",
+        processing: "Processing",
+        file: "file(s)",
+        done: "Done",
+        error: "Error",
+        finished: "Finished.",
+        success: "Success",
+        failed: "Failed"
+      },
+      status: "Status",
+      footer: "FreeImageTools. Free web tools for everyone"
+    }
+  }), []);
+
+  const texts = t[lang];
 
   // id presets
   const presets = useMemo(
@@ -25,9 +160,25 @@ export default function HomePage() {
   const idHeight = presets[idPresetIndex].h;
 
   // status texts
-  const [jpgStatus, setJpgStatus] = useState("Waiting for images...");
-  const [resizeStatus, setResizeStatus] = useState("Waiting for images...");
-  const [idStatus, setIdStatus] = useState("Waiting for images...");
+  const [jpgStatus, setJpgStatus] = useState(() => t[lang].jpg.waiting);
+  const [resizeStatus, setResizeStatus] = useState(() => t[lang].resize.waiting);
+  const [idStatus, setIdStatus] = useState(() => t[lang].idphoto.waiting);
+
+  // Update status texts when language changes (only if showing default waiting message)
+  useEffect(() => {
+    const currentTexts = t[lang];
+    const koWaiting = t.ko.jpg.waiting;
+    const enWaiting = t.en.jpg.waiting;
+    if (jpgStatus === koWaiting || jpgStatus === enWaiting) {
+      setJpgStatus(currentTexts.jpg.waiting);
+    }
+    if (resizeStatus === t.ko.resize.waiting || resizeStatus === t.en.resize.waiting) {
+      setResizeStatus(currentTexts.resize.waiting);
+    }
+    if (idStatus === t.ko.idphoto.waiting || idStatus === t.en.idphoto.waiting) {
+      setIdStatus(currentTexts.idphoto.waiting);
+    }
+  }, [lang, jpgStatus, resizeStatus, idStatus, t]);
 
   const year = new Date().getFullYear();
 
@@ -223,36 +374,36 @@ export default function HomePage() {
   // ---------- drop handlers ----------
   async function onDropJpg(files) {
     const images = files.filter((f) => f.type.startsWith("image/"));
-    if (!images.length) return setJpgStatus("No image files detected.");
+    if (!images.length) return setJpgStatus(texts.jpg.noImages);
 
-    setJpgStatus(`Processing ${images.length} file(s)...`);
+    setJpgStatus(`${texts.jpg.processing} ${images.length} ${texts.jpg.file}...`);
     let idx = 0;
 
     for (const file of images) {
       idx++;
-      setJpgStatus(`Processing ${idx} / ${images.length}\nCurrent: ${file.name}`);
+      setJpgStatus(`${texts.jpg.processing} ${idx} / ${images.length}\n${lang === "ko" ? "현재: " : "Current: "}${file.name}`);
       try {
         await convertToJpgAndDownload(file, jpgQuality);
-        setJpgStatus((prev) => prev + "\n→ Done.");
+        setJpgStatus((prev) => prev + `\n→ ${texts.jpg.done}`);
       } catch (e) {
-        setJpgStatus((prev) => prev + `\n→ Error: ${e.message}`);
+        setJpgStatus((prev) => prev + `\n→ ${texts.jpg.error}: ${e.message}`);
       }
     }
-    setJpgStatus((prev) => prev + "\n\nFinished.");
+    setJpgStatus((prev) => prev + `\n\n${texts.jpg.finished}`);
   }
 
   async function onDropResize(files) {
     const images = files.filter((f) => f.type.startsWith("image/"));
-    if (!images.length) return setResizeStatus("No image files detected.");
+    if (!images.length) return setResizeStatus(texts.resize.noImages);
 
-    setResizeStatus(`Processing ${images.length} file(s)...`);
+    setResizeStatus(`${texts.resize.processing} ${images.length} ${texts.resize.file}...`);
     let idx = 0,
       success = 0,
       fail = 0;
 
     for (const file of images) {
       idx++;
-      setResizeStatus(`Processing ${idx} / ${images.length}\nCurrent: ${file.name}`);
+      setResizeStatus(`${texts.resize.processing} ${idx} / ${images.length}\n${lang === "ko" ? "현재: " : "Current: "}${file.name}`);
       try {
         const result = await compressToTargetSizeAuto(file, resizeTargetKB);
         const origKB = (file.size / 1024).toFixed(1);
@@ -263,33 +414,33 @@ export default function HomePage() {
         setResizeStatus(
           (prev) =>
             prev +
-            `\n→ Done: ${origKB} KB → ${newKB} KB (q=${result.finalQuality.toFixed(
+            `\n→ ${texts.resize.done}: ${origKB} KB → ${newKB} KB (q=${result.finalQuality.toFixed(
               3
             )}, ${result.width}x${result.height})`
         );
       } catch (e) {
         fail++;
-        setResizeStatus((prev) => prev + `\n→ Error: ${e.message}`);
+        setResizeStatus((prev) => prev + `\n→ ${texts.resize.error}: ${e.message}`);
       }
     }
 
     setResizeStatus(
-      (prev) => prev + `\n\nFinished.\nSuccess: ${success}, Failed: ${fail}`
+      (prev) => prev + `\n\n${texts.resize.finished}\n${texts.resize.success}: ${success}, ${texts.resize.failed}: ${fail}`
     );
   }
 
   async function onDropId(files) {
     const images = files.filter((f) => f.type.startsWith("image/"));
-    if (!images.length) return setIdStatus("No image files detected.");
+    if (!images.length) return setIdStatus(texts.idphoto.noImages);
 
-    setIdStatus(`Processing ${images.length} file(s)...`);
+    setIdStatus(`${texts.idphoto.processing} ${images.length} ${texts.idphoto.file}...`);
     let idx = 0,
       success = 0,
       fail = 0;
 
     for (const file of images) {
       idx++;
-      setIdStatus(`Processing ${idx} / ${images.length}\nCurrent: ${file.name}`);
+      setIdStatus(`${texts.idphoto.processing} ${idx} / ${images.length}\n${lang === "ko" ? "현재: " : "Current: "}${file.name}`);
       try {
         const result = await createIdPhoto(file, idWidth, idHeight, idTargetKB);
         const origKB = (file.size / 1024).toFixed(1);
@@ -300,17 +451,17 @@ export default function HomePage() {
         setIdStatus(
           (prev) =>
             prev +
-            `\n→ Done: ${origKB} KB → ${newKB} KB (q=${result.finalQuality.toFixed(
+            `\n→ ${texts.idphoto.done}: ${origKB} KB → ${newKB} KB (q=${result.finalQuality.toFixed(
               3
             )}, ${idWidth}x${idHeight})`
         );
       } catch (e) {
         fail++;
-        setIdStatus((prev) => prev + `\n→ Error: ${e.message}`);
+        setIdStatus((prev) => prev + `\n→ ${texts.idphoto.error}: ${e.message}`);
       }
     }
 
-    setIdStatus((prev) => prev + `\n\nFinished.\nSuccess: ${success}, Failed: ${fail}`);
+    setIdStatus((prev) => prev + `\n\n${texts.idphoto.finished}\n${texts.idphoto.success}: ${success}, ${texts.idphoto.failed}: ${fail}`);
   }
 
   function getFilesFromDrop(e) {
@@ -325,39 +476,53 @@ export default function HomePage() {
         <div className="brand">
           <div className="logo-circle">FI</div>
           <div className="brand-text">
-            <h1>FreeImageTools</h1>
-            <span>Free JPG converter & image size reducer in your browser.</span>
+            <h1>{texts.title}</h1>
+            <span>{texts.subtitle}</span>
           </div>
         </div>
         <div className="top-right">
-          <div className="hero-note">100% browser-based · No upload to server</div>
+          <div className="lang-buttons">
+            <button 
+              className={`lang-btn ${lang === "ko" ? "active" : ""}`}
+              onClick={() => setLang("ko")}
+            >
+              한글
+            </button>
+            <button 
+              className={`lang-btn ${lang === "en" ? "active" : ""}`}
+              onClick={() => setLang("en")}
+            >
+              EN
+            </button>
+          </div>
+          <div className="hero-note">{texts.heroNote}</div>
         </div>
       </header>
 
       <main className="card">
         <div className="tabs">
           <button className={`tab-btn ${tab === "jpg" ? "active" : ""}`} onClick={() => setTab("jpg")}>
-            JPG Converter
+            {texts.tabs.jpg}
           </button>
           <button className={`tab-btn ${tab === "resize" ? "active" : ""}`} onClick={() => setTab("resize")}>
-            Image Size
+            {texts.tabs.resize}
           </button>
           <button className={`tab-btn ${tab === "idphoto" ? "active" : ""}`} onClick={() => setTab("idphoto")}>
-            ID Photo
+            {texts.tabs.idphoto}
           </button>
         </div>
 
         {/* JPG */}
         <section className={`panel ${tab === "jpg" ? "active" : ""}`}>
           <div className="panel-header">
-            <div className="panel-title">JPG Converter</div>
-            <div className="panel-sub">Convert PNG, WebP and more into JPG files.</div>
+            <div className="panel-title">{texts.jpg.title}</div>
+            <div className="panel-sub">{texts.jpg.sub}</div>
           </div>
 
           <div className="option-block">
             <div className="option-row">
-              <label htmlFor="jpgQuality">JPG Quality</label>
-              <small>(Higher = bigger file, better quality)</small>
+              <label htmlFor="jpgQuality">{texts.jpg.quality}</label>
+              <small>{texts.jpg.qualityDesc}</small>
             </div>
             <div className="option-row">
               <input
@@ -383,11 +548,11 @@ export default function HomePage() {
                 await onDropJpg(getFilesFromDrop(e));
               }}
             >
-              <div className="drop-main">Drag & drop image file(s)</div>
-              <div className="drop-sub">PNG, WebP, etc. will be converted to JPG.</div>
+              <div className="drop-main">{texts.jpg.dropMain}</div>
+              <div className="drop-sub">{texts.jpg.dropSub}</div>
             </div>
             <div className="status-box">
-              <div className="status-title">Status</div>
+              <div className="status-title">{texts.status}</div>
               {jpgStatus}
             </div>
           </div>
@@ -396,14 +561,14 @@ export default function HomePage() {
         {/* Resize */}
         <section className={`panel ${tab === "resize" ? "active" : ""}`}>
           <div className="panel-header">
-            <div className="panel-title">Image Size Adjustment</div>
-            <div className="panel-sub">Compress images to your target size (KB).</div>
+            <div className="panel-title">{texts.resize.title}</div>
+            <div className="panel-sub">{texts.resize.sub}</div>
           </div>
 
           <div className="option-block">
             <div className="option-row">
-              <label htmlFor="resizeTarget">Target size</label>
-              <small>Move the slider (50KB ~ 1000KB). 50KB step.</small>
+              <label htmlFor="resizeTarget">{texts.resize.targetSize}</label>
+              <small>{texts.resize.targetSizeDesc}</small>
             </div>
             <div className="option-row">
               <input
@@ -430,11 +595,11 @@ export default function HomePage() {
                 await onDropResize(getFilesFromDrop(e));
               }}
             >
-              <div className="drop-main">Drag & drop image file(s)</div>
-              <div className="drop-sub">Each image will be recompressed under the selected size.</div>
+              <div className="drop-main">{texts.resize.dropMain}</div>
+              <div className="drop-sub">{texts.resize.dropSub}</div>
             </div>
             <div className="status-box">
-              <div className="status-title">Status</div>
+              <div className="status-title">{texts.status}</div>
               {resizeStatus}
             </div>
           </div>
@@ -443,14 +608,14 @@ export default function HomePage() {
         {/* ID Photo */}
         <section className={`panel ${tab === "idphoto" ? "active" : ""}`}>
           <div className="panel-header">
-            <div className="panel-title">ID Photo</div>
-            <div className="panel-sub">Create standard ID photos for passport, visa, and forms.</div>
+            <div className="panel-title">{texts.idphoto.title}</div>
+            <div className="panel-sub">{texts.idphoto.sub}</div>
           </div>
 
           <div className="option-block">
             <div className="option-row">
-              <span>Size preset</span>
-              <small>Common standards (center-crop + resize).</small>
+              <span>{texts.idphoto.sizePreset}</span>
+              <small>{texts.idphoto.sizePresetDesc}</small>
             </div>
             <div className="size-buttons">
               {presets.map((p, i) => (
@@ -467,8 +632,8 @@ export default function HomePage() {
 
           <div className="option-block">
             <div className="option-row">
-              <label htmlFor="idTarget">File size</label>
-              <small>50KB ~ 1000KB. 100–300KB is good for most online forms. 50KB step.</small>
+              <label htmlFor="idTarget">{texts.idphoto.fileSize}</label>
+              <small>{texts.idphoto.fileSizeDesc}</small>
             </div>
             <div className="option-row">
               <input
@@ -495,20 +660,20 @@ export default function HomePage() {
                 await onDropId(getFilesFromDrop(e));
               }}
             >
-              <div className="drop-main">Drag & drop face photo(s)</div>
+              <div className="drop-main">{texts.idphoto.dropMain}</div>
               <div className="drop-sub">
-                The image will be center-cropped to the selected ratio and resized to ID photo size.
+                {texts.idphoto.dropSub}
               </div>
             </div>
             <div className="status-box">
-              <div className="status-title">Status</div>
+              <div className="status-title">{texts.status}</div>
               {idStatus}
             </div>
           </div>
         </section>
       </main>
 
-      <footer>© {year} FreeImageTools. Free web tools for everyone.</footer>
+      <footer>© {year} {texts.footer}</footer>
     </div>
   );
 }
