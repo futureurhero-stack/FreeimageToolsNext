@@ -15,6 +15,7 @@ export default function RootLayout({ children }) {
       <head>
         <meta name="google-adsense-account" content="ca-pub-2947007400947272" />
         <meta name="google-site-verification" content="NxOfBV1OdIGVDYaWX8D1HQqT3AMU-192wC-s5O8fQCY" />
+        <meta name="naver-site-verification" content="d2674ed1907b4cf4e544f07a40281dfe83ca7579" />
       </head>
       <body>{children}</body>
     </html>
