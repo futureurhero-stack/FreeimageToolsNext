@@ -42,6 +42,18 @@ export default function IdPhotoPage() {
         jpg: "JPG 변환기",
         resize: "이미지 크기",
         idphoto: "증명사진"
+      },
+      infoSection: {
+        title: "증명사진 규격 및 제작 가이드",
+        content: `증명사진은 여권, 비자, 신분증, 입사 지원서 등 다양한 공식 문서에 필요한 필수 자료입니다. 각 국가와 기관마다 요구하는 증명사진 규격이 다르므로, 신청 전에 정확한 규격을 확인하는 것이 중요합니다.
+
+일반적으로 가장 많이 사용되는 증명사진 규격은 다음과 같습니다. 국제 여권용은 35mm×45mm (413×531 픽셀) 크기가 표준이며, 이는 대부분의 국가에서 인정하는 범용 규격입니다. 미국 비자용은 2인치×2인치 (600×600 픽셀) 정사각형 형식이 요구되며, 많은 국가의 표준 신분증은 30mm×40mm (354×472 픽셀) 크기를 사용합니다.
+
+증명사진 제작 시 고려해야 할 주요 사항들이 있습니다. 배경은 일반적으로 흰색 또는 밝은 회색 단색이어야 하며, 얼굴이 사진의 중심에 위치해야 합니다. 눈은 완전히 열려있어야 하고, 안경을 착용하는 경우 반사가 없어야 합니다. 표정은 중립적이어야 하며, 미소는 허용되지만 과도한 표정은 피해야 합니다.
+
+온라인 서식 제출 시 파일 크기도 중요합니다. 대부분의 온라인 시스템은 100KB에서 300KB 사이의 파일 크기를 권장합니다. 너무 큰 파일은 업로드가 실패하거나 처리 시간이 오래 걸릴 수 있으며, 너무 작은 파일은 품질이 저하될 수 있습니다. 우리의 증명사진 도구는 이러한 요구사항을 충족시키기 위해 파일 크기를 조절할 수 있는 기능을 제공합니다.
+
+우리 서비스는 이미지를 자동으로 중앙 크롭하고 요구되는 크기로 리사이즈합니다. 이를 통해 전문적인 사진관을 방문하지 않고도 집에서 편리하게 증명사진을 제작할 수 있습니다. 모든 처리는 브라우저에서 이루어지므로 개인정보 보호가 보장되며, 즉시 다운로드하여 사용할 수 있습니다.`
       }
     },
     en: {
@@ -74,6 +86,18 @@ export default function IdPhotoPage() {
         jpg: "JPG Converter",
         resize: "Image Size",
         idphoto: "ID Photo"
+      },
+      infoSection: {
+        title: "ID Photo Specifications and Creation Guide",
+        content: `ID photos are essential materials required for various official documents such as passports, visas, identification cards, and job applications. Since each country and institution has different ID photo specifications, it's important to check the exact requirements before applying.
+
+The most commonly used ID photo specifications are as follows. International passport photos typically require 35mm×45mm (413×531 pixels), which is a universal standard accepted by most countries. US visa photos require a 2-inch×2-inch (600×600 pixels) square format, while many countries' standard ID cards use 30mm×40mm (354×472 pixels).
+
+There are several important considerations when creating ID photos. The background should generally be white or light gray solid color, and the face should be centered in the photo. Eyes should be fully open, and if wearing glasses, there should be no reflection. The expression should be neutral, and while a smile is allowed, excessive expressions should be avoided.
+
+File size is also important when submitting online forms. Most online systems recommend file sizes between 100KB and 300KB. Files that are too large may fail to upload or take too long to process, while files that are too small may have reduced quality. Our ID photo tool provides the ability to adjust file size to meet these requirements.
+
+Our service automatically crops images to the center and resizes them to the required dimensions. This allows you to conveniently create ID photos at home without visiting a professional photo studio. All processing is done in your browser, ensuring privacy protection, and you can download and use the photos immediately.`
       }
     }
   }), []);
@@ -377,6 +401,15 @@ export default function IdPhotoPage() {
           </div>
         </section>
       </main>
+
+      <section className="info-section">
+        <h2>{texts.infoSection.title}</h2>
+        <div className="info-content">
+          {texts.infoSection.content.split('\n\n').map((paragraph, idx) => (
+            <p key={idx}>{paragraph}</p>
+          ))}
+        </div>
+      </section>
 
       <footer>© {year} {texts.footer}</footer>
     </div>

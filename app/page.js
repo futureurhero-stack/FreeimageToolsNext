@@ -38,6 +38,18 @@ export default function JpgConverterPage() {
         jpg: "JPG 변환기",
         resize: "이미지 크기",
         idphoto: "증명사진"
+      },
+      infoSection: {
+        title: "JPG 형식에 대한 가이드",
+        content: `JPEG(또는 JPG)는 Joint Photographic Experts Group에서 개발한 가장 널리 사용되는 이미지 파일 형식 중 하나입니다. 이 형식은 손실 압축 알고리즘을 사용하여 파일 크기를 크게 줄이면서도 시각적으로 만족스러운 품질을 유지합니다.
+
+JPG 형식은 특히 사진과 복잡한 이미지에 적합합니다. 이 형식의 주요 장점은 작은 파일 크기로 인한 빠른 로딩 속도와 웹 호환성입니다. 대부분의 웹사이트, 소셜 미디어 플랫폼, 이메일 클라이언트에서 JPG를 지원하므로 이미지를 공유하거나 업로드할 때 문제없이 사용할 수 있습니다.
+
+JPG로 변환할 때 고려해야 할 주요 사항은 품질 설정입니다. 높은 품질(80-95%)은 더 나은 이미지 품질을 제공하지만 파일 크기가 커집니다. 반면 낮은 품질(40-60%)은 파일 크기를 크게 줄이지만 이미지 세부사항이 손실될 수 있습니다. 일반적으로 80% 품질은 품질과 파일 크기 사이의 좋은 균형을 제공합니다.
+
+PNG 파일을 JPG로 변환하는 경우, PNG는 투명도를 지원하지만 JPG는 그렇지 않다는 점을 알아두세요. 투명한 배경은 흰색으로 변환됩니다. WebP 형식도 최신 웹 표준이지만, 모든 브라우저에서 완벽하게 지원되지 않을 수 있으므로 호환성을 위해 JPG로 변환하는 것이 좋습니다.
+
+우리의 JPG 변환기는 100% 브라우저에서 실행되므로 이미지를 서버에 업로드할 필요가 없습니다. 이는 개인정보 보호와 보안 측면에서 큰 장점입니다. 변환된 이미지는 즉시 다운로드되어 사용할 수 있습니다.`
       }
     },
     en: {
@@ -66,6 +78,18 @@ export default function JpgConverterPage() {
         jpg: "JPG Converter",
         resize: "Image Size",
         idphoto: "ID Photo"
+      },
+      infoSection: {
+        title: "Understanding JPG Format",
+        content: `JPEG (or JPG) is one of the most widely used image file formats, developed by the Joint Photographic Experts Group. This format uses a lossy compression algorithm that significantly reduces file size while maintaining visually satisfactory quality.
+
+JPG format is particularly suitable for photographs and complex images. The main advantages of this format are fast loading speeds due to small file sizes and excellent web compatibility. Most websites, social media platforms, and email clients support JPG, so you can use it without any issues when sharing or uploading images.
+
+When converting to JPG, the main consideration is the quality setting. High quality (80-95%) provides better image quality but results in larger file sizes. On the other hand, low quality (40-60%) significantly reduces file size but may result in loss of image detail. Generally, 80% quality provides a good balance between quality and file size.
+
+When converting PNG files to JPG, it's important to note that PNG supports transparency while JPG does not. Transparent backgrounds will be converted to white. WebP format is also a modern web standard, but since it's not perfectly supported in all browsers, converting to JPG is better for compatibility.
+
+Our JPG converter runs 100% in your browser, so there's no need to upload images to a server. This is a significant advantage in terms of privacy and security. Converted images are immediately available for download and use.`
       }
     }
   }), []);
@@ -281,6 +305,15 @@ export default function JpgConverterPage() {
           </div>
         </section>
       </main>
+
+      <section className="info-section">
+        <h2>{texts.infoSection.title}</h2>
+        <div className="info-content">
+          {texts.infoSection.content.split('\n\n').map((paragraph, idx) => (
+            <p key={idx}>{paragraph}</p>
+          ))}
+        </div>
+      </section>
 
       <footer>© {year} {texts.footer}</footer>
     </div>
