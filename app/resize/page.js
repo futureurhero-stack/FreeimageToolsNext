@@ -5,7 +5,12 @@ import Link from "next/link";
 
 export default function ResizePage() {
   // language
-  const [lang, setLang] = useState("en");
+  const [lang, setLang] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('lang') || 'en';
+    }
+    return 'en';
+  });
 
   // sliders
   const [resizeTargetKB, setResizeTargetKB] = useState(500);
@@ -112,6 +117,13 @@ Our image size adjustment tool uses a binary search algorithm to automatically f
       setResizeStatus(currentTexts.resize.waiting);
     }
   }, [lang, resizeStatus, t]);
+
+  // Save language preference to localStorage
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('lang', lang);
+    }
+  }, [lang]);
 
   const year = new Date().getFullYear();
 
@@ -315,13 +327,23 @@ Our image size adjustment tool uses a binary search algorithm to automatically f
           <div className="lang-buttons">
             <button 
               className={`lang-btn ${lang === "ko" ? "active" : ""}`}
-              onClick={() => setLang("ko")}
+              onClick={() => {
+                setLang("ko");
+                if (typeof window !== 'undefined') {
+                  localStorage.setItem('lang', 'ko');
+                }
+              }}
             >
               한글
             </button>
             <button 
               className={`lang-btn ${lang === "en" ? "active" : ""}`}
-              onClick={() => setLang("en")}
+              onClick={() => {
+                setLang("en");
+                if (typeof window !== 'undefined') {
+                  localStorage.setItem('lang', 'en');
+                }
+              }}
             >
               ENGLISH
             </button>

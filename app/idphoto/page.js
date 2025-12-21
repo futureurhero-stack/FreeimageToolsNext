@@ -5,7 +5,12 @@ import Link from "next/link";
 
 export default function IdPhotoPage() {
   // language
-  const [lang, setLang] = useState("en");
+  const [lang, setLang] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('lang') || 'en';
+    }
+    return 'en';
+  });
 
   // sliders
   const [idTargetKB, setIdTargetKB] = useState(200);
@@ -129,6 +134,13 @@ Our service automatically crops images to the center and resizes them to the req
       setIdStatus(currentTexts.idphoto.waiting);
     }
   }, [lang, idStatus, t]);
+
+  // Save language preference to localStorage
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('lang', lang);
+    }
+  }, [lang]);
 
   const year = new Date().getFullYear();
 
@@ -299,13 +311,23 @@ Our service automatically crops images to the center and resizes them to the req
           <div className="lang-buttons">
             <button 
               className={`lang-btn ${lang === "ko" ? "active" : ""}`}
-              onClick={() => setLang("ko")}
+              onClick={() => {
+                setLang("ko");
+                if (typeof window !== 'undefined') {
+                  localStorage.setItem('lang', 'ko');
+                }
+              }}
             >
               한글
             </button>
             <button 
               className={`lang-btn ${lang === "en" ? "active" : ""}`}
-              onClick={() => setLang("en")}
+              onClick={() => {
+                setLang("en");
+                if (typeof window !== 'undefined') {
+                  localStorage.setItem('lang', 'en');
+                }
+              }}
             >
               ENGLISH
             </button>
