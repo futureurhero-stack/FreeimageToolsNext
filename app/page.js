@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 export default function HomePage() {
   // language
-  const [lang, setLang] = useState("ko");
+  const [lang, setLang] = useState("en");
 
   // tabs
   const [tab, setTab] = useState("jpg");
@@ -492,7 +492,7 @@ export default function HomePage() {
               className={`lang-btn ${lang === "en" ? "active" : ""}`}
               onClick={() => setLang("en")}
             >
-              EN
+              ENGLISH
             </button>
           </div>
           <div className="hero-note">{texts.heroNote}</div>

@@ -83,10 +83,10 @@ body {
   border-color: var(--accent);
 }
 .lang-btn.active {
-  background: var(--accent);
+  background: #f97316;
   color: #fff;
-  border-color: var(--accent);
-  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+  border-color: #f97316;
+  box-shadow: 0 2px 4px rgba(249, 115, 22, 0.3);
 }
 .hero-note {
   font-size: 12px;
