@@ -215,6 +215,28 @@ input[type="range"] { flex: 1; }
 }
 .drop-sub { font-size: 13px; }
 
+.file-select-btn {
+  margin-top: 12px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1.5px solid var(--accent);
+  background: var(--accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.file-select-btn:hover {
+  background: var(--accent-text);
+  border-color: var(--accent-text);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+}
+.file-select-btn:active {
+  transform: translateY(0);
+}
+
 .status-box {
   flex: 1 1 260px;
   border-radius: 12px;

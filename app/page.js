@@ -32,6 +32,7 @@ export default function HomePage() {
         qualityDesc: "(높을수록 파일 크기는 크고 품질은 좋음)",
         dropMain: "이미지 파일을 드래그 & 드롭하세요",
         dropSub: "PNG, WebP 등이 JPG로 변환됩니다.",
+        selectFiles: "파일 선택",
         waiting: "이미지 대기 중...",
         noImages: "이미지 파일이 감지되지 않았습니다.",
         processing: "처리 중",
@@ -47,6 +48,7 @@ export default function HomePage() {
         targetSizeDesc: "슬라이더를 이동하세요 (50KB ~ 1000KB). 50KB 단위.",
         dropMain: "이미지 파일을 드래그 & 드롭하세요",
         dropSub: "각 이미지가 선택한 크기로 재압축됩니다.",
+        selectFiles: "파일 선택",
         waiting: "이미지 대기 중...",
         noImages: "이미지 파일이 감지되지 않았습니다.",
         processing: "처리 중",
@@ -66,6 +68,7 @@ export default function HomePage() {
         fileSizeDesc: "50KB ~ 1000KB. 대부분의 온라인 서식에는 100-300KB가 적합합니다. 50KB 단위.",
         dropMain: "얼굴 사진을 드래그 & 드롭하세요",
         dropSub: "이미지는 선택한 비율로 중앙 크롭되고 증명사진 크기로 리사이즈됩니다.",
+        selectFiles: "파일 선택",
         waiting: "이미지 대기 중...",
         noImages: "이미지 파일이 감지되지 않았습니다.",
         processing: "처리 중",
@@ -95,6 +98,7 @@ export default function HomePage() {
         qualityDesc: "(Higher = bigger file, better quality)",
         dropMain: "Drag & drop image file(s)",
         dropSub: "PNG, WebP, etc. will be converted to JPG.",
+        selectFiles: "Select Files",
         waiting: "Waiting for images...",
         noImages: "No image files detected.",
         processing: "Processing",
@@ -110,6 +114,7 @@ export default function HomePage() {
         targetSizeDesc: "Move the slider (50KB ~ 1000KB). 50KB step.",
         dropMain: "Drag & drop image file(s)",
         dropSub: "Each image will be recompressed under the selected size.",
+        selectFiles: "Select Files",
         waiting: "Waiting for images...",
         noImages: "No image files detected.",
         processing: "Processing",
@@ -129,6 +134,7 @@ export default function HomePage() {
         fileSizeDesc: "50KB ~ 1000KB. 100–300KB is good for most online forms. 50KB step.",
         dropMain: "Drag & drop face photo(s)",
         dropSub: "The image will be center-cropped to the selected ratio and resized to ID photo size.",
+        selectFiles: "Select Files",
         waiting: "Waiting for images...",
         noImages: "No image files detected.",
         processing: "Processing",
@@ -186,6 +192,11 @@ export default function HomePage() {
   const [jpgDrag, setJpgDrag] = useState(false);
   const [resizeDrag, setResizeDrag] = useState(false);
   const [idDrag, setIdDrag] = useState(false);
+
+  // file input refs
+  const jpgFileInputRef = useRef(null);
+  const resizeFileInputRef = useRef(null);
+  const idFileInputRef = useRef(null);
 
   // ---------- helpers ----------
   function loadImageFile(file) {
@@ -469,6 +480,36 @@ export default function HomePage() {
     return files;
   }
 
+  function getFilesFromInput(e) {
+    const files = Array.from(e.target.files || []);
+    return files;
+  }
+
+  function handleJpgFileSelect(e) {
+    const files = getFilesFromInput(e);
+    if (files.length > 0) {
+      onDropJpg(files);
+    }
+    // Reset input to allow selecting the same file again
+    e.target.value = '';
+  }
+
+  function handleResizeFileSelect(e) {
+    const files = getFilesFromInput(e);
+    if (files.length > 0) {
+      onDropResize(files);
+    }
+    e.target.value = '';
+  }
+
+  function handleIdFileSelect(e) {
+    const files = getFilesFromInput(e);
+    if (files.length > 0) {
+      onDropId(files);
+    }
+    e.target.value = '';
+  }
+
   // ---------- UI ----------
   return (
     <div className="wrapper">
@@ -550,6 +591,20 @@ export default function HomePage() {
             >
               <div className="drop-main">{texts.jpg.dropMain}</div>
               <div className="drop-sub">{texts.jpg.dropSub}</div>
+              <input
+                type="file"
+                ref={jpgFileInputRef}
+                style={{ display: 'none' }}
+                accept="image/*"
+                multiple
+                onChange={handleJpgFileSelect}
+              />
+              <button
+                className="file-select-btn"
+                onClick={() => jpgFileInputRef.current?.click()}
+              >
+                {texts.jpg.selectFiles}
+              </button>
             </div>
             <div className="status-box">
               <div className="status-title">{texts.status}</div>
@@ -597,6 +652,20 @@ export default function HomePage() {
             >
               <div className="drop-main">{texts.resize.dropMain}</div>
               <div className="drop-sub">{texts.resize.dropSub}</div>
+              <input
+                type="file"
+                ref={resizeFileInputRef}
+                style={{ display: 'none' }}
+                accept="image/*"
+                multiple
+                onChange={handleResizeFileSelect}
+              />
+              <button
+                className="file-select-btn"
+                onClick={() => resizeFileInputRef.current?.click()}
+              >
+                {texts.resize.selectFiles}
+              </button>
             </div>
             <div className="status-box">
               <div className="status-title">{texts.status}</div>
@@ -664,6 +733,20 @@ export default function HomePage() {
               <div className="drop-sub">
                 {texts.idphoto.dropSub}
               </div>
+              <input
+                type="file"
+                ref={idFileInputRef}
+                style={{ display: 'none' }}
+                accept="image/*"
+                multiple
+                onChange={handleIdFileSelect}
+              />
+              <button
+                className="file-select-btn"
+                onClick={() => idFileInputRef.current?.click()}
+              >
+                {texts.idphoto.selectFiles}
+              </button>
             </div>
             <div className="status-box">
               <div className="status-title">{texts.status}</div>
