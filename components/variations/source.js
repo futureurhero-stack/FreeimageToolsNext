@@ -225,7 +225,13 @@ Our JPG converter runs 100% in your browser, so there's no need to upload images
       <header className="site-header">
         <div className="brand">
           <Link href="/" className="brand-link">
-          <div className="logo-circle">FI</div>
+          <div className="logo-circle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" strokeWidth="2" fill="none"/>
+              <circle cx="9" cy="9" r="2" fill="currentColor"/>
+              <path d="M4 16l4-4 3 3 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+            </svg>
+          </div>
           <div className="brand-text">
               <h1>{texts.title}</h1>
               <span>{texts.subtitle}</span>
