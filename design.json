@@ -1,0 +1,214 @@
+{
+    "meta": {
+      "name": "Image Tools Design System",
+      "version": "1.0.0",
+      "generatedAt": "2025-12-24",
+      "notes": [
+        "Client-side image conversion tools (JPG convert, resize, ID photo)",
+        "Project overview intentionally excluded"
+      ]
+    },
+  
+    "designSystem": {
+      "tokens": {
+        "color": {
+          "background": {
+            "base": "#05060D",
+            "surface": "rgba(12,16,40,0.85)",
+            "card": "rgba(20,22,40,0.85)"
+          },
+          "brand": {
+            "primary": "#7B61FF",
+            "secondary": "#9A84FF",
+            "glow": "rgba(123,97,255,0.4)"
+          },
+          "text": {
+            "primary": "#FFFFFF",
+            "secondary": "#A1A1AA",
+            "muted": "#71717A"
+          },
+          "border": {
+            "subtle": "rgba(255,255,255,0.06)",
+            "default": "rgba(255,255,255,0.10)"
+          },
+          "state": {
+            "success": "rgba(34,211,238,0.85)",
+            "error": "rgba(239,68,68,0.85)"
+          }
+        },
+  
+        "gradient": {
+          "pageBackground": "radial-gradient(900px 600px at 10% 6%, rgba(123,97,255,0.25) 0%, rgba(5,6,13,0) 60%), radial-gradient(700px 500px at 92% 10%, rgba(154,132,255,0.18) 0%, rgba(5,6,13,0) 55%)",
+          "primaryButton": "linear-gradient(135deg, #7B61FF 0%, #9A84FF 100%)"
+        },
+  
+        "radius": {
+          "sm": 8,
+          "md": 12,
+          "lg": 16,
+          "xl": 20,
+          "pill": 999
+        },
+  
+        "shadow": {
+          "card": "0 12px 40px rgba(0,0,0,0.45)",
+          "glow": "0 0 32px rgba(123,97,255,0.45)"
+        },
+  
+        "motion": {
+          "transition": "0.25s ease-out",
+          "hoverLift": "translateY(-2px)",
+          "focusRing": "0 0 0 3px rgba(123,97,255,0.35)"
+        },
+  
+        "typography": {
+          "fontFamily": "Inter, system-ui, sans-serif",
+          "sizes": {
+            "title": 24,
+            "body": 16,
+            "small": 14,
+            "caption": 12
+          }
+        }
+      },
+  
+      "components": {
+        "dropzone": {
+          "container": {
+            "background": "rgba(255,255,255,0.04)",
+            "border": "1px dashed rgba(255,255,255,0.18)",
+            "radius": "xl",
+            "padding": 28,
+            "textAlign": "center"
+          },
+          "states": {
+            "idle": {},
+            "hover": {
+              "background": "rgba(123,97,255,0.08)",
+              "borderColor": "rgba(123,97,255,0.55)"
+            },
+            "dragActive": {
+              "background": "rgba(34,211,238,0.10)",
+              "borderColor": "rgba(34,211,238,0.70)"
+            },
+            "disabled": {
+              "opacity": 0.45
+            }
+          }
+        },
+  
+        "fileQueue": {
+          "item": {
+            "background": "tokens.color.background.card",
+            "border": "1px solid tokens.color.border.subtle",
+            "radius": "lg",
+            "shadow": "tokens.shadow.card",
+            "padding": 16
+          },
+          "thumbnail": {
+            "radius": "md",
+            "border": "1px solid rgba(255,255,255,0.08)"
+          },
+          "metaText": {
+            "fileName": "tokens.color.text.primary",
+            "fileInfo": "tokens.color.text.muted"
+          }
+        },
+  
+        "toolbar": {
+          "container": {
+            "background": "rgba(255,255,255,0.04)",
+            "border": "1px solid rgba(255,255,255,0.08)",
+            "radius": "xl",
+            "padding": "14px 16px"
+          },
+          "chip": {
+            "background": "rgba(255,255,255,0.06)",
+            "border": "1px solid rgba(255,255,255,0.10)",
+            "radius": "pill",
+            "padding": "8px 12px",
+            "states": {
+              "selected": {
+                "background": "rgba(123,97,255,0.16)",
+                "borderColor": "rgba(123,97,255,0.45)",
+                "textColor": "tokens.color.text.primary"
+              }
+            }
+          }
+        },
+  
+        "progress": {
+          "track": "rgba(255,255,255,0.08)",
+          "fill": "tokens.gradient.primaryButton",
+          "height": 8,
+          "radius": "pill"
+        },
+  
+        "button": {
+          "primary": {
+            "background": "tokens.gradient.primaryButton",
+            "textColor": "#FFFFFF",
+            "radius": "pill",
+            "padding": "14px 32px",
+            "shadow": "tokens.shadow.glow",
+            "states": {
+              "hover": {
+                "transform": "scale(1.04)",
+                "shadow": "0 0 40px rgba(123,97,255,0.65)"
+              },
+              "active": {
+                "transform": "scale(0.98)"
+              },
+              "disabled": {
+                "opacity": 0.4,
+                "shadow": "none"
+              }
+            }
+          },
+          "ghost": {
+            "background": "rgba(255,255,255,0.06)",
+            "border": "1px solid rgba(255,255,255,0.10)",
+            "radius": "pill",
+            "padding": "10px 16px"
+          }
+        },
+  
+        "modal": {
+          "backdrop": "rgba(0,0,0,0.55)",
+          "panel": {
+            "background": "rgba(12,16,40,0.85)",
+            "border": "1px solid rgba(255,255,255,0.10)",
+            "radius": "xl",
+            "shadow": "tokens.shadow.card",
+            "padding": 18,
+            "maxWidth": 560
+          }
+        },
+  
+        "toast": {
+          "background": "rgba(12,16,40,0.85)",
+          "border": "1px solid rgba(255,255,255,0.10)",
+          "radius": "lg",
+          "padding": "12px 14px",
+          "variants": {
+            "success": "tokens.color.state.success",
+            "error": "tokens.color.state.error"
+          }
+        }
+      },
+  
+      "guardrails": {
+        "avoid": [
+          "텍스트에 그림자 적용",
+          "아이콘에 페이지 그라데이션 직접 사용",
+          "버튼 컬러를 일반 본문 텍스트에 재사용"
+        ],
+        "ensure": [
+          "모든 이미지 처리는 클라이언트에서 수행됨을 명확히 표시",
+          "대량 파일 처리 시 Web Worker 사용",
+          "파일별 진행률과 전체 진행률을 항상 표시"
+        ]
+      }
+    }
+  }
+  

@@ -1,0 +1,360 @@
+# Design Variations Generator - Cursor Rules
+## FreeImageTools (Image Conversion/Resize/ID Photo Service)
+
+## Primary Directive
+
+Generate 3 distinct visual variations of any provided design while maintaining identical functionality and component structure. All variations must work seamlessly with the image processing features (drag & drop, file selection, Canvas API processing, language switching).
+
+## Core Rules
+
+### File Management Protocol
+
+```
+1. Create `components/` directory at project root (if it doesn't exist)
+2. Create `components/variations/` directory inside components
+3. Save original as `components/variations/source.js` with complete implementation
+4. Generate exactly 3 variations: `components/variations/design1.js`, `design2.js`, `design3.js`
+5. Create corresponding CSS modules in `app/styles/variations/` or use inline styles with CSS variables
+6. Generate comparison page at `app/variations/page.js`
+7. Maintain Next.js App Router structure (all pages go in `app/` directory)
+8. If components folder doesn't exist in project, create it at root level
+```
+
+### Component Structure Requirements
+
+- **Identical Props Interface**: All variations must accept same props
+- **Same Functionality**: Preserve all interactive behaviors, state management, and image processing logic
+- **JavaScript First**: Use modern JavaScript (ES6+), no TypeScript unless explicitly needed
+- **CSS Variables**: Leverage existing oklch color system and design tokens
+- **Dark Mode Support**: All variations should respect `.dark` class on `<html>` element
+
+### Design Variation Strategy
+
+For FreeImageTools service, generate these 3 distinct approaches:
+
+#### Variation 1: Minimal Modern (Clean & Spacious)
+- **Visual Style**: Ultra-clean, generous whitespace, subtle borders
+- **Color Approach**: Use muted oklch colors with high contrast text
+- **Typography**: Larger font sizes, increased line-height for readability
+- **Borders**: Thin, subtle borders (1px solid with low opacity)
+- **Shadows**: Minimal or no shadows, flat design aesthetic
+- **Background**: Subtle gradient or solid color from design system
+- **Buttons**: Flat with subtle hover states, clear visual hierarchy
+- **Drop Zone**: Large, minimal border, clear drag feedback
+
+#### Variation 2: Dark Professional (Current Enhanced)
+- **Visual Style**: Deep dark theme, glowing accents, premium feel
+- **Color Approach**: Use existing dark oklch palette with enhanced glow effects
+- **Typography**: Bold headings, clear hierarchy
+- **Borders**: Glowing borders on hover/active states
+- **Shadows**: Enhanced shadow-glow effects for cards and buttons
+- **Background**: Rich gradient backgrounds with subtle glow
+- **Buttons**: Gradient buttons with strong glow effects
+- **Drop Zone**: Dark background with glowing border on drag-over
+
+#### Variation 3: Vibrant Gradient (Energetic & Modern)
+- **Visual Style**: Bold gradients, vibrant colors, energetic feel
+- **Color Approach**: Use vibrant oklch colors with saturated gradients
+- **Typography**: Bold, colorful headings with gradient text effects
+- **Borders**: Gradient borders, colorful accents
+- **Shadows**: Colorful shadow effects matching brand colors
+- **Background**: Strong gradient backgrounds with multiple color stops
+- **Buttons**: Vibrant gradient buttons with hover animations
+- **Drop Zone**: Gradient background with animated border on drag-over
+
+### Code Generation Template
+
+```javascript
+"use client";
+
+import { useState, useEffect, useRef, useMemo } from "react";
+import Link from "next/link";
+// Option 1: CSS Module (create app/styles/variations/designX.module.css)
+import styles from "../../app/styles/variations/designX.module.css";
+
+// Option 2: Inline styles using CSS variables from globals.css (no import needed)
+
+// Always start with this interface pattern (as JSDoc comments for JS)
+/**
+ * @typedef {Object} ComponentProps
+ * @property {string} lang - Language code ('en' | 'ko')
+ * @property {Function} onLangChange - Language change callback
+ * // Extract all props from original design
+ */
+
+// Each variation follows this structure
+export default function DesignX() {
+  // Identical state management to source
+  const [lang, setLang] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('lang') || 'en';
+    }
+    return 'en';
+  });
+
+  // Identical logic to source
+  // Only styling changes via CSS modules or inline styles
+  
+  return (
+    <div className={styles.container}>
+      {/* Same JSX structure, different classes */}
+      {/* Preserve all drag & drop handlers */}
+      {/* Preserve all file input refs */}
+      {/* Preserve all image processing logic */}
+    </div>
+  );
+}
+```
+
+### CSS Module Patterns
+
+```css
+/* app/styles/variations/designX.module.css */
+
+/* Use CSS variables from globals.css */
+.container {
+  /* Base layout (same across all) */
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 20px 60px;
+  
+  /* Variation-specific styling */
+  background: var(--bg-base); /* Will respect .dark class */
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card); /* Or variation-specific */
+}
+
+/* Ensure responsive behavior */
+@media (max-width: 640px) {
+  .container {
+    padding: 20px 16px 40px;
+  }
+}
+
+/* Preserve drag & drop states */
+.dropZone {
+  /* Base styles */
+}
+
+.dropZone.dragover {
+  /* Drag-over feedback */
+}
+```
+
+### Comparison Page Template
+
+```javascript
+// app/variations/page.js
+"use client";
+
+import { useState } from "react";
+import Source from "../../components/variations/source";
+import Design1 from "../../components/variations/design1";
+import Design2 from "../../components/variations/design2";
+import Design3 from "../../components/variations/design3";
+
+// Note: Import paths assume components/ folder is at project root
+// Adjust import paths if components folder is in a different location
+
+export default function VariationsPage() {
+  const [lang, setLang] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('lang') || 'en';
+    }
+    return 'en';
+  });
+
+  return (
+    <div className="variations-showcase">
+      <header style={{ padding: '2rem', textAlign: 'center' }}>
+        <h1>Design Variations Comparison</h1>
+        <p>FreeImageTools - Visual Design Variations</p>
+      </header>
+
+      <section style={{ marginBottom: '4rem' }}>
+        <h2>Original Design</h2>
+        <Source />
+      </section>
+
+      <section style={{ marginBottom: '4rem' }}>
+        <h2>Variation 1: Minimal Modern</h2>
+        <p style={{ marginBottom: '1rem', color: 'var(--text-secondary)' }}>
+          Clean, spacious design with subtle accents
+        </p>
+        <Design1 />
+      </section>
+
+      <section style={{ marginBottom: '4rem' }}>
+        <h2>Variation 2: Dark Professional</h2>
+        <p style={{ marginBottom: '1rem', color: 'var(--text-secondary)' }}>
+          Premium dark theme with glowing accents
+        </p>
+        <Design2 />
+      </section>
+
+      <section style={{ marginBottom: '4rem' }}>
+        <h2>Variation 3: Vibrant Gradient</h2>
+        <p style={{ marginBottom: '1rem', color: 'var(--text-secondary)' }}>
+          Energetic design with bold gradients
+        </p>
+        <Design3 />
+      </section>
+    </div>
+  );
+}
+```
+
+## Implementation Workflow
+
+1. **Analyze Original**: Extract props, state management, image processing logic, and structure
+2. **Create Directory Structure**: 
+   - Create `components/` folder at project root (if doesn't exist)
+   - Create `components/variations/` subdirectory
+   - Create `app/styles/variations/` for CSS modules (or use inline styles)
+3. **Create Source**: Implement original as `components/variations/source.js` with complete functionality
+4. **Generate Variations**: Create 3 distinct visual versions in `components/variations/` maintaining all logic
+5. **Style Implementation**: Build corresponding CSS modules in `app/styles/variations/` using oklch design tokens
+6. **Comparison Page**: Create showcase page at `app/variations/page.js` for easy comparison
+7. **Test Functionality**: Ensure drag & drop, file selection, and image processing work identically
+
+## FreeImageTools Specific Requirements
+
+### Must Preserve
+
+- **Image Processing Logic**: Canvas API operations, file conversion, resizing
+- **Drag & Drop Handlers**: `onDragOver`, `onDragLeave`, `onDrop` events
+- **File Input Refs**: `useRef` for file input elements
+- **Language State**: `localStorage` persistence for language preference
+- **Translation Objects**: `useMemo` for translations (ko/en)
+- **Status Management**: File queue, processing status, error handling
+- **Download Functionality**: File download logic must remain identical
+
+### Design Token Usage
+
+Always use CSS variables from `globals.css`:
+- Colors: `var(--bg-base)`, `var(--brand-primary)`, `var(--text-primary)`, etc.
+- Radius: `var(--radius-sm)`, `var(--radius-md)`, `var(--radius-lg)`, etc.
+- Shadows: `var(--shadow-card)`, `var(--shadow-glow)`, etc.
+- Gradients: `var(--gradient-page-bg)`, `var(--gradient-primary-button)`, etc.
+- Typography: `var(--font-family)`, `var(--font-size-body)`, etc.
+
+### Responsive Considerations
+
+- Mobile-first approach (max-width: 640px)
+- Maintain touch-friendly target sizes (min 44px)
+- Ensure drop zones are accessible on mobile
+- File selection buttons must work on all devices
+
+## Quality Checklist
+
+- [ ] All 4 files created (source + 3 variations)
+- [ ] Identical functionality across all versions
+- [ ] Unique visual appearance for each variation
+- [ ] Proper JavaScript (ES6+) with JSDoc type hints
+- [ ] CSS modules for style isolation
+- [ ] Responsive design considerations
+- [ ] Comparison page at `app/variations/page.js`
+- [ ] Dark mode support via CSS variables
+- [ ] Drag & drop functionality preserved
+- [ ] File selection functionality preserved
+- [ ] Image processing logic preserved
+- [ ] Language switching functionality preserved
+- [ ] Translation objects maintained
+
+## Critical Constraints
+
+**DO NOT:**
+- Change component logic, state management, or image processing algorithms
+- Modify event handlers (drag/drop, file input, etc.)
+- Alter file structure or naming conventions
+- Break responsive design
+- Remove accessibility features
+- Change translation keys or structure
+- Modify localStorage usage patterns
+
+**ALWAYS:**
+- Maintain identical user interactions and behaviors
+- Use CSS modules or scoped styles to prevent conflicts
+- Preserve all drag & drop functionality
+- Keep file input refs and handlers identical
+- Use design tokens from globals.css
+- Respect dark mode via CSS variables
+- Maintain translation support (ko/en)
+- Keep image processing logic unchanged
+
+## Output Expectations
+
+Generate complete, production-ready Next.js App Router components that:
+
+1. Demonstrate clear visual differentiation across 3 variations
+2. Maintain 100% functional equivalence with original
+3. Follow Next.js App Router best practices
+4. Use modern JavaScript patterns (hooks, refs, memoization)
+5. Leverage existing oklch design system
+6. Provide immediate value for design decision-making
+7. Work seamlessly with existing image processing features
+
+## Service-Specific Design Guidelines
+
+### Drop Zones
+- Must maintain visual feedback on drag-over state
+- Clear indication of drop area
+- Mobile-friendly file selection button
+- Status messages for processing state
+
+### File Queue Items
+- Consistent thumbnail display
+- Clear status indicators (waiting, processing, done, error)
+- Proper file metadata display
+- Download functionality preserved
+
+### Toolbars/Options
+- Sliders must maintain same functionality
+- Button groups (size selectors, etc.) must work identically
+- Quality/resize inputs must preserve logic
+
+### Navigation
+- Language switcher must work in all variations
+- Page navigation links must function identically
+- Active state indicators must be clear
+
+## Project File Structure
+
+When generating variations, create the following directory structure:
+
+```
+프로젝트 루트/
+  ├── components/              (생성 필요 - 프로젝트 루트에)
+  │   └── variations/
+  │       ├── source.js       (원본 컴포넌트)
+  │       ├── design1.js      (Variation 1: Minimal Modern)
+  │       ├── design2.js      (Variation 2: Dark Professional)
+  │       └── design3.js      (Variation 3: Vibrant Gradient)
+  │
+  ├── app/
+  │   ├── styles/             (생성 필요)
+  │   │   └── variations/
+  │   │       ├── design1.module.css
+  │   │       ├── design2.module.css
+  │   │       └── design3.module.css
+  │   │
+  │   ├── variations/
+  │   │   └── page.js         (비교 페이지)
+  │   │
+  │   └── globals.css         (기존 CSS 변수 사용)
+  │
+  └── .cursorrules            (이 파일)
+```
+
+### Import Paths
+
+From `components/variations/design1.js`:
+- CSS module: `import styles from "../../app/styles/variations/design1.module.css";`
+
+From `app/variations/page.js`:
+- Components: `import Design1 from "../../components/variations/design1";`
+
+**Important**: The `components/` folder must be created at the project root level if it doesn't exist.
+
+Execute this workflow automatically when provided with any design reference or component specification from the FreeImageTools codebase.
