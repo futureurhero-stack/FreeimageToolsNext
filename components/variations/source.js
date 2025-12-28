@@ -4,13 +4,16 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 
 export default function Source() {
-  // language
-  const [lang, setLang] = useState(() => {
+  // language - Always start with 'en' to avoid hydration mismatch
+  const [lang, setLang] = useState('en');
+  
+  // Load language from localStorage only on client side after mount
+  useEffect(() => {
     if (typeof window !== 'undefined') {
-      return localStorage.getItem('lang') || 'en';
+      const savedLang = localStorage.getItem('lang') || 'en';
+      setLang(savedLang);
     }
-    return 'en';
-  });
+  }, []);
 
   // sliders
   const [jpgQuality, setJpgQuality] = useState(80);
@@ -101,8 +104,8 @@ Our JPG converter runs 100% in your browser, so there's no need to upload images
 
   const texts = t[lang];
 
-  // status texts
-  const [jpgStatus, setJpgStatus] = useState(() => t[lang].jpg.waiting);
+  // status texts - Initialize with default 'en' text to avoid hydration mismatch
+  const [jpgStatus, setJpgStatus] = useState(t.en.jpg.waiting);
 
   // Update status texts when language changes
   useEffect(() => {

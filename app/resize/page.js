@@ -4,13 +4,16 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 
 export default function ResizePage() {
-  // language
-  const [lang, setLang] = useState(() => {
+  // language - Always start with 'en' to avoid hydration mismatch
+  const [lang, setLang] = useState('en');
+  
+  // Load language from localStorage only on client side after mount
+  useEffect(() => {
     if (typeof window !== 'undefined') {
-      return localStorage.getItem('lang') || 'en';
+      const savedLang = localStorage.getItem('lang') || 'en';
+      setLang(savedLang);
     }
-    return 'en';
-  });
+  }, []);
 
   // sliders
   const [resizeTargetKB, setResizeTargetKB] = useState(500);
@@ -105,8 +108,8 @@ Our image size adjustment tool uses a binary search algorithm to automatically f
 
   const texts = t[lang];
 
-  // status texts
-  const [resizeStatus, setResizeStatus] = useState(() => t[lang].resize.waiting);
+  // status texts - Initialize with default 'en' text to avoid hydration mismatch
+  const [resizeStatus, setResizeStatus] = useState(t.en.resize.waiting);
 
   // Update status texts when language changes
   useEffect(() => {

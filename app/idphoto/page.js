@@ -4,13 +4,16 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 
 export default function IdPhotoPage() {
-  // language
-  const [lang, setLang] = useState(() => {
+  // language - Always start with 'en' to avoid hydration mismatch
+  const [lang, setLang] = useState('en');
+  
+  // Load language from localStorage only on client side after mount
+  useEffect(() => {
     if (typeof window !== 'undefined') {
-      return localStorage.getItem('lang') || 'en';
+      const savedLang = localStorage.getItem('lang') || 'en';
+      setLang(savedLang);
     }
-    return 'en';
-  });
+  }, []);
 
   // sliders
   const [idTargetKB, setIdTargetKB] = useState(200);
@@ -122,8 +125,8 @@ Our service automatically crops images to the center and resizes them to the req
   const idWidth = presets[idPresetIndex].w;
   const idHeight = presets[idPresetIndex].h;
 
-  // status texts
-  const [idStatus, setIdStatus] = useState(() => t[lang].idphoto.waiting);
+  // status texts - Initialize with default 'en' text to avoid hydration mismatch
+  const [idStatus, setIdStatus] = useState(t.en.idphoto.waiting);
 
   // Update status texts when language changes
   useEffect(() => {
