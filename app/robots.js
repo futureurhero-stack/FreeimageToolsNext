@@ -6,12 +6,17 @@ export default function robots() {
       {
         userAgent: '*',
         allow: '/',
-        disallow: [],
+        disallow: ['/api/', '/_next/'],
       },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,
+    host: baseUrl,
   };
 }
+
+
+
+
 
 
 
